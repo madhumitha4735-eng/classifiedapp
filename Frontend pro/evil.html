@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WiFi Security Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .wifi-list {
+            width: 350px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .wifi-card {
+            background: #1e293b;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .wifi-card:hover {
+            background: #334155;
+        }
+
+        .signal {
+            float: right;
+        }
+
+        .safe { color: #22c55e; }
+        .danger { color: #ef4444; }
+
+        .result-box {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📡 WiFi Security Scanner</h1>
+<p>Select a network to analyze</p>
+
+<div class="wifi-list">
+
+    <div class="wifi-card" onclick="checkWifi('College_WiFi','AA:BB:CC:DD:EE:FF')">
+        College_WiFi <span class="signal">📶📶📶📶</span>
+    </div>
+
+    <div class="wifi-card" onclick="checkWifi('Free_WiFi','11:22:33:44:55:66')">
+        Free_WiFi <span class="signal">📶📶📶</span>
+    </div>
+
+    <div class="wifi-card" onclick="checkWifi('Airport_WiFi','77:88:99:AA:BB:CC')">
+        Airport_WiFi <span class="signal">📶📶</span>
+    </div>
+
+</div>
+
+<div class="result-box" id="result"></div>
+
+<script>
+function checkWifi(ssid, bssid) {
+
+    let result = document.getElementById("result");
+
+    if (ssid !== "College_WiFi") {
+        result.innerHTML = "❌ UNKNOWN NETWORK";
+        result.className = "result-box danger";
+    } 
+    else if (bssid !== "AA:BB:CC:DD:EE:FF") {
+        result.innerHTML = "⚠️ FAKE WiFi (Evil Twin Detected)";
+        result.className = "result-box danger";
+    } 
+    else {
+        result.innerHTML = "✅ LEGITIMATE WiFi (Secure)";
+        result.className = "result-box safe";
+    }
+}
+</script>
+
+</body>
+</html>
